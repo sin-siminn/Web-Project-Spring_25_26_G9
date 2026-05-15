@@ -1,22 +1,15 @@
 <?php
-// config/db.php
-$host = 'localhost';
-$db   = 'auction_system';
-$user = 'root';
-$pass = ''; // Default XAMPP password is empty
-$charset = 'utf8mb4';
+// Database configuration
+$servername = "localhost";
+$username = "root";
+$password = ""; // XAMPP default is empty
+$dbname = "auction_system";
 
-// The Global Requirements specify using PDO or mysqli with prepared statements 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-];
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
 
-try {
-     $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (\PDOException $e) {
-     throw new \PDOException($e->getMessage(), (int)$e->getCode());
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
 ?>
