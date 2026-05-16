@@ -1,34 +1,26 @@
 <?php
-// controllers/AuthController.php
-require_once '../config/db.php'; // Include the database connection [cite: 12]
+// Legacy registration controller. The register page currently posts to register_controller.php,
+// but this file is kept working in case it is used directly.
+require_once __DIR__ . '/../config/db.php';
 
 if (isset($_POST['register'])) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $bio = $_POST['bio'];
-    
-    // Requirement 1.2.7: Hash password for security [cite: 13, 27]
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    
-    // Requirement 1.2.6: Default registration as buyer (seller_verified = 0) [cite: 26]
-    $role = 'buyer';
-    $seller_verified = 0;
+    $name = mysqli_real_escape_string($conn, $_POST['name'] ?? '');
+    $email = mysqli_real_escape_string($conn, $_POST['email'] ?? '');
+    $phone = mysqli_real_escape_string($conn, $_POST['phone'] ?? '');
+    $bio = mysqli_real_escape_string($conn, $_POST['bio'] ?? '');
+    $password = password_hash($_POST['password'] ?? '', PASSWORD_BCRYPT);
 
-    try {
-        // Requirement 1.1.4: Use PDO with prepared statements [cite: 14]
-        $sql = "INSERT INTO users (name, email, password_hash, role, seller_verified, bio, phone) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $pdo->prepare($sql);
-        
-        if ($stmt->execute([$name, $email, $password, $role, $seller_verified, $bio, $phone])) {
-            // Requirement 1.2.7: Redirect to login on success [cite: 27]
-            header("Location: ../views/login.php?success=registered");
-            exit();
-        }
-    } catch (PDOException $e) {
-        // Requirement 1.1.5: Server-side validation/error handling [cite: 15]
-        echo "Error: " . $e->getMessage();
+    $stmt = $conn->prepare(
+        "INSERT INTO users (name, email, phone, bio, password, role, seller_verified)
+         VALUES (?, ?, ?, ?, ?, 'buyer', 0)"
+    );
+    $stmt->bind_param('sssss', $name, $email, $phone, $bio, $password);
+
+    if ($stmt->execute()) {
+        header('Location: ../views/login.php?success=registered');
+        exit;
     }
+
+    echo 'Error: ' . $conn->error;
 }
 ?>
