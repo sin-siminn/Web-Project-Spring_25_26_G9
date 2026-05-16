@@ -1,0 +1,108 @@
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Navbar Style */
+.nav-links {
+    list-style: none; /* This removes the dots */
+    margin: 0;
+    padding: 0;
+    display: flex; /* This puts them in a row */
+}
+
+.nav-links li {
+    margin-left: 20px; /* This adds space between the items */
+}
+
+.nav-links a {
+    text-decoration: none; /* This removes the blue underline */
+    color: white; /* Change this to match your navbar color */
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between icon and text */
+}
+
+/* If you want to hide the "English" part or style it */
+.language-bar {
+    display: flex;
+    justify-content: flex-end; /* Pushes it to the right */
+    padding: 10px 5%;
+    font-size: 14px;
+    background-color: #f8f9fa;
+}
+
+
+/* Main Login Area */
+.main-content {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+h1 {
+    color: #31708f; /* Light blue heading */
+    font-weight: normal;
+    font-size: 36px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #31708f;
+    font-size: 18px;
+    margin-top: 0;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #eeeeee;
+    margin: 20px 0;
+}
+
+/* Form Styling */
+.login-form {
+    max-width: 600px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    width: 150px;
+    font-weight: bold;
+    text-align: right;
+    margin-right: 20px;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.checkbox-group {
+    margin-left: 170px;
+}
+
+/* Button Styling */
+.btn-login {
+    margin-left: 170px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-login:hover {
+    background-color: #e6e6e6;
+}
