@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
-    <title>Login - Online Auction </title>
-=======
     <title>Log In - Auction System</title>
     <link rel="stylesheet" href="../assets/css/style.css">
->>>>>>> 97f10b6b9e2aa698dcfac697e85740b2f4457ce8
 </head>
 <body>
     <div class="main-content">
@@ -15,7 +11,6 @@
         <hr>
 
         <form action="../controllers/login_controller.php" method="POST" class="login-form">
-            
             <div class="form-group">
                 <label>Email</label>
                 <input type="email" name="email" required>

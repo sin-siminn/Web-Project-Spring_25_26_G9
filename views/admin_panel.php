@@ -23,6 +23,7 @@ $result = mysqli_query($conn, $sql);
     <div class="main-content">
         <h1>Admin Panel</h1>
         <p class="subtitle">Manage pending seller verification requests.</p>
+        <p><a class="btn-primary" href="../controllers/AdminAnalyticsController.php">View Admin Analytics Dashboard</a></p>
         <hr>
 
         <table border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
