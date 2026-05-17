@@ -1,6 +1,12 @@
 <?php
+<<<<<<< HEAD
 // controllers/AuthController.php
 require_once '../config/db.php'; // Database connection
+=======
+// Legacy registration controller. The register page currently posts to register_controller.php,
+// but this file is kept working in case it is used directly.
+require_once __DIR__ . '/../config/db.php';
+>>>>>>> e79faca14239cbb5e665b3275454d0b2b75a3f0d
 
 session_start();
 
@@ -25,6 +31,7 @@ function requireLogin() {
  * Handle registration form submission
  */
 if (isset($_POST['register'])) {
+<<<<<<< HEAD
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
@@ -49,6 +56,25 @@ if (isset($_POST['register'])) {
         }
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
+=======
+    $name = mysqli_real_escape_string($conn, $_POST['name'] ?? '');
+    $email = mysqli_real_escape_string($conn, $_POST['email'] ?? '');
+    $phone = mysqli_real_escape_string($conn, $_POST['phone'] ?? '');
+    $bio = mysqli_real_escape_string($conn, $_POST['bio'] ?? '');
+    $password = password_hash($_POST['password'] ?? '', PASSWORD_BCRYPT);
+
+    $stmt = $conn->prepare(
+        "INSERT INTO users (name, email, phone, bio, password, role, seller_verified)
+         VALUES (?, ?, ?, ?, ?, 'buyer', 0)"
+    );
+    $stmt->bind_param('sssss', $name, $email, $phone, $bio, $password);
+
+    if ($stmt->execute()) {
+        header('Location: ../views/login.php?success=registered');
+        exit;
+>>>>>>> e79faca14239cbb5e665b3275454d0b2b75a3f0d
     }
+
+    echo 'Error: ' . $conn->error;
 }
 ?>
